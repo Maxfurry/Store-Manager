@@ -35,7 +35,8 @@ body {
     height: 320px;
     width: 80%;
     margin: 0 auto;
-    background-color: aquamarine; 
+    /* background-color: aquamarine;  */
+    background: url("../images/bgd/bgd-m.jpeg");
 }
 
 .menu {
@@ -85,5 +86,15 @@ footer {
         display: flex;
         flex-direction: row;
         flex-basis: 95%;
+    }
+}
+
+@media (max-width: 960px) {
+    .img {
+        height: 320px;
+        width: 80%;
+        margin: 0 auto;
+        /* background-color: aquamarine;  */
+        background: url("../images/bgd/bgd.jpeg");
     }
 }
