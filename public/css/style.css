@@ -123,6 +123,20 @@ table button {
     margin-left: 2px;
 }
 
+.cartTitle {
+    text-align: center;
+}
+
+.cartItem {
+    padding: 10px;
+}
+
+.cart .button {
+    padding: 10px 20px;
+    background-color: #90ee90;
+    float: right;
+}
+
 .login {
     height: 600px;
     width: 400px;
