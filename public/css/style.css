@@ -29,13 +29,14 @@ body {
 .above {
     background-color: lightgreen;
     padding: 5px;
+    border-bottom: 5px solid darkgreen;
 }
 
 .img {
     height: 320px;
     width: 80%;
     margin: 0 auto;
-    background-color: aquamarine; 
+    background: url("../images/bgd/bgd-m.jpeg");
 }
 
 .menu {
@@ -45,6 +46,36 @@ body {
 
 .filter {
     padding: 5px;   
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropBtn {
+    background-color: #90ee90;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.dropContent {
+    display: none;
+    position: absolute;
+    width: 150px;
+    background-color: #90ee90;
+}
+
+.dropContent a {
+    color: #000000;
+    padding: 10px, 15px;
+    text-decoration: none;
+    display: block;
+    border: 2px solid #006400;
+}
+
+.dropdown:hover .dropContent {
+    display: block;
 }
 
 .items {
@@ -58,11 +89,52 @@ body {
     border-top: 5px solid darkgreen;
 }
 
+table {
+    width: 80%;
+    margin: 20px auto;
+}
+
+table tr:nth-child(odd) {
+    background-color: #90ee90;
+}
+
+table th {
+    text-align: left;
+    border: 2px solid darkgreen;
+}
+
+table td {
+    padding: 10px 0 10px 10px;
+}
+
+table .button {
+    padding-left: 0; 
+    background-color: white;
+}
+
+table button {
+    padding: 0 20px; 
+}
+
 .cart {
     flex: 1;
     background-color: beige;
     height: 600px;
     margin-left: 2px;
+}
+
+.cartTitle {
+    text-align: center;
+}
+
+.cartItem {
+    padding: 10px;
+}
+
+.cart .button {
+    padding: 10px 20px;
+    background-color: #90ee90;
+    float: right;
 }
 
 .login {
@@ -85,5 +157,15 @@ footer {
         display: flex;
         flex-direction: row;
         flex-basis: 95%;
+    }
+}
+
+@media (max-width: 960px) {
+    .img {
+        height: 320px;
+        width: 80%;
+        margin: 0 auto;
+        /* background-color: aquamarine;  */
+        background: url("../images/bgd/bgd.jpeg");
     }
 }
