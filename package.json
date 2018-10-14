@@ -4,7 +4,10 @@
   "description": "Manage sales, goods and sales attentant for a store",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node ./server.js",
+    "build": "babel ./src -s -d dist",
+    "mocha": "mocha --compilers js:babel-register",
+    "test": "mocha --compilers js:babel-register --recursive --timeout 10000"
   },
   "repository": {
     "type": "git",
