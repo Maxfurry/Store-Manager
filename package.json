@@ -4,7 +4,7 @@
   "description": "Manage sales, goods and sales attentant for a store",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./server.js",
+    "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
     "test": "mocha --compilers js:babel-register --recursive --timeout 10000"
