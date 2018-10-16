@@ -1,0 +1,16 @@
+{
+  "Pepsi[60Cl]": {
+    "product": "Pepsi[60Cl]",
+    "category": "Drinks",
+    "quantity": "2",
+    "price": "300",
+    "attendant": "Adeniran Mark"
+  },
+  "Pepsi[50Cl]": {
+    "product": "Pepsi[50Cl]",
+    "category": "Drinks",
+    "quantity": "2",
+    "price": "200",
+    "attendant": "Adeniran Mark"
+  }
+}
