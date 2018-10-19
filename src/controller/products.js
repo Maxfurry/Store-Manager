@@ -44,6 +44,7 @@ class product {
     createProduct (req, res, next) {
         let product = {
             name: req.body.name,
+            productId: req.body.name,
             category: req.body.category,
             price: req.body.price,
             quantity: req.body.quantity
@@ -55,7 +56,7 @@ class product {
                 throw err;
             }
             let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = product;
+            arrayOfObjects[req.body.productId] = product;
             console.log(arrayOfObjects)
 
             fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
@@ -66,8 +67,12 @@ class product {
                     let arrayOfObjects = {};        
                     arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
                     arrayOfObjects = JSON.parse(arrayOfObjects);
-                    res.status(500).send(arrayOfObjects);
-                    console.log('saved');
+                    return res.status(200).json({
+                        TYPE: 'POST',
+                        status: 200,
+                        info: product,
+                        message: 'Product Created Successfully',
+                      });
                 }
             })
         })
@@ -77,6 +82,7 @@ class product {
     updateProduct (req, res, next) {
         let product = {
             name: req.body.name,
+            productId: req.body.productId,
             category: req.body.category,
             price: req.body.price,
             quantity: req.body.quantity
@@ -88,7 +94,7 @@ class product {
                 throw err;
             }
             let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = product;
+            arrayOfObjects[req.body.productId] = product;
             console.log(arrayOfObjects)
 
             fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
@@ -99,8 +105,12 @@ class product {
                     let arrayOfObjects = {};        
                     arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
                     arrayOfObjects = JSON.parse(arrayOfObjects);
-                    res.status(500).send(arrayOfObjects);
-                    console.log('saved');
+                    return res.status(200).json({
+                        TYPE: 'POST',
+                        status: 200,
+                        info: product,
+                        message: 'Product Updated Successfully',
+                    });
                 }
             })
         })
@@ -114,17 +124,27 @@ class product {
                throw err;
            }
            let arrayOfObjects = JSON.parse(data);
-           let product = arrayOfObjects[req.body.name];
-           delete arrayOfObjects[req.body.name];
+           let product = arrayOfObjects[req.body.productId];
+           delete arrayOfObjects[req.body.productId];
            console.log(arrayOfObjects)
 
-           return res.status(200).json({
-               TYPE: 'POST',
-               status: 200,
-               info: product,
-               message: 'User Created Successfully',
-             });
-       })
+           fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
+            if(err) {
+                console.log(err);
+                throw err;
+            } else {
+                let arrayOfObjects = {};        
+                arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
+                arrayOfObjects = JSON.parse(arrayOfObjects);
+                return res.status(200).json({
+                    TYPE: 'POST',
+                    status: 200,
+                    info: product,
+                    message: 'Product Successfully Deleted',
+                });
+            }
+        })
+    })
    }
 }
 

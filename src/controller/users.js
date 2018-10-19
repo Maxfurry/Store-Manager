@@ -47,16 +47,9 @@ class users {
         })
     }
 
-    // Module that logsin user
+    // Module that logs in users
     loginUser (req, res, next) {
-        let user = {
-            name: req.body.name,
-            role: req.body.role,
-            position: req.body.position,
-            password: req.body.password
-        }
-
-        let arrayOfObjects = {};        
+       let arrayOfObjects = {};        
         arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
         arrayOfObjects = JSON.parse(arrayOfObjects);
         let password = arrayOfObjects[req.body.name].password;    
@@ -67,7 +60,7 @@ class users {
                     name: req.body.name,
                     role: req.body.role
                 }, "lagretame", {
-                    expiresIn: "240s"
+                    expiresIn: "1h"
                 });
             
                 return res.status(200).json({

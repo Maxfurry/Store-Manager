@@ -1,13 +1,14 @@
 {
+  "Adeniran Mark": {
+    "name": "Adeniran Mark",
+    "role": "admin",
+    "position": "Manager",
+    "password": "$2a$10$fvGMcY3giAQj/0hdaTTBoOxCRmCzUCqxUX8c9Y8QNRfXYgKRAF5du"
+  },
   "tweety": {
     "name": "tweety",
     "role": "user",
     "position": "Attendant",
     "password": "$2a$10$ZBk3A13u.poFXFjmngOcUe.rARyqwFHla7WPj3WPFkZM.SeawSnce"
-  },
-  "Adeniran Mark": {
-    "name": "Adeniran Mark",
-    "role": "Admin",
-    "password": "$2a$10$J0d4MNTJePx/FclXbinAEO3tNZuIdWoYfsvJKIoY5fETwHKboaAl2"
   }
 }
