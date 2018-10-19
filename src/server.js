@@ -2,9 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 //import path from 'path';
 
-//import usersRouter from './route/users';
+import usersRouter from './route/users';
 import productsRouter from './route/products';
 import salesRouter from './route/sales';
+import authRouter from './route/users';
 
 const app = express();
 
@@ -15,7 +16,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api/v1/products', productsRouter); 
 app.use('/api/v1/sales', salesRouter); 
-//app.use('/api/v1/auth', usersRouter);    
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/user', usersRouter);    
+
+app.get('/', (req, res) => {
+res.status(200).send({
+    
+});
+});
 
 const port = process.env.PORT||3000;
 

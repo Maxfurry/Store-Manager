@@ -1,14 +1,11 @@
 {
-  "Pepsi[60Cl]": {
-    "name": "Pepsi[60Cl]",
-    "category": "Drinks",
-    "price": "150",
-    "quantity": "20"
-  },
   "Cocacola[60Cl]": {
     "name": "Cocacola[60Cl]",
     "category": "Drinks",
     "price": "150",
     "quantity": "25"
+  },
+  "Adeniran Mark": {
+    "name": "Adeniran Mark"
   }
 }

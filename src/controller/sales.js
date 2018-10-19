@@ -15,7 +15,7 @@ class sales {
             return res.status(200).json({
                 TYPE: 'GET',
                 status: 200,
-                data: arrayOfObjects,
+                info: arrayOfObjects,
                 message: 'Request to get all sales successfull',
               });
         })
@@ -35,7 +35,7 @@ class sales {
             return res.status(200).json({
                 TYPE: 'GET',
                 status: 200,
-                data: data,
+                info: data,
                 message: `Request to get ${salesId} successfull`,
             });
         })      
@@ -75,10 +75,28 @@ class sales {
             })
         })
     }
+
+    //Module that delete user
+    deleteSaleRecord (req, res, next) {    
+        fs.readFile('src/model/db/products.json', 'utf-8', (err, data)=> {
+           if (err) {
+               console.log(err);
+               throw err;
+           }
+           let arrayOfObjects = JSON.parse(data);
+           let saleRecord = arrayOfObjects[req.body.name];
+           delete arrayOfObjects[req.body.name];
+           console.log(arrayOfObjects)
+
+           return res.status(200).json({
+               TYPE: 'POST',
+               status: 200,
+               info: saleRecord,
+               message: 'User Created Successfully',
+             });
+       })
+   }
     
-    // deleteSaleRecord (req, res, next) {
-        
-    // }
     
     // updateSaleRecord (req, res, next) {
         
