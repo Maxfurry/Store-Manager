@@ -7,6 +7,6 @@ router
     .post('/create',checkAuth.checkAdmin, users.createUser)
     .post('/login',users.loginUser)
     .patch('/', checkAuth.checkToken, users.updateUser)
-    .delete('/:userID', checkAuth.checkAdmin, users.deleteUser)
+    .delete('/', checkAuth.checkAdmin, users.deleteUser)
 
 export default router; 
