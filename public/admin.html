@@ -8,37 +8,438 @@
         <link rel="stylesheet" href="css/admin.css">
     </head>
     <body>
-        <div class="above">
-            <span class="right"><h3>Username</h3></span>
-            <h3>Store Manager</h3>
+        <header id="header">
+            <div class="right dropdown">
+                <button class="dropBtn"><h3>Username</h3></button>
+                <div class="dropContent">
+                    <a href="login.html">Logout</a>
+                </div>   
+            </div>
+            <a href="index.html"><h3>Store Manager</h3></a>
             <div class="clearfix"></div>
-        </div>
+        </header> 
+        <div id="container">
+            <div id="content">
+                <div id="users" class="tabBody">
+                    <div>
+                        <h1>Create Users</h1>
+                        <form>
+                            <input type="text" placeholder="Name" required>
+                            <input type="text" placeholder="Password" required>
+                            <input type="text" placeholder="Role" required>
+                            <select name="role" id="">Role
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>  
+                            </select>
+                            <input type="submit" value="Create">
+                        </form>
+                    </div>
+                    
+                    <h3>Users List</h3>
 
-        <div id = "sideMenu">
-            <a href="javascript:void(0)" class="closeBtn" onclick="closeMenu()">&times;</a>
-
-            <a id = "users" class="menuItem">
-                <img src="">
-                <span>Users</span>
-            </a>
-
-            <a id = "items" class="menuItem">
-                <img src="">
-                <span>Items</span>
-            </a>
+                    <table class="table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Permission</th>
+                        </tr>
+    
+                        <tr>
+                            <td>Adeniran Mark</td>
+                            <td>tgery6676@34</td>
+                            <td>Sales Manager</td>
+                            <td>Admin</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Ogedengbe Paul</td>
+                            <td>67ttrfg!@345565</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Rejoice Temitope</td>
+                            <td>hjfjhs77677&&</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Sonoye Rachael</td>
+                            <td>67ttrfg!@345565</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
         
-            <a id = "records" class="menuItem">
-                <img src="">
-                <span>Records</span>
-            </a>
-
-            <a id = "categories" class="menuItem">
-                <img src="">
-                <span>Categories</span>
-            </a>
-        </div>
-        <span onclick="openMenu()"> Menu </span>
+                        <tr>
+                            <td>Agboola Funmilayo</td>
+                            <td>jkahk&*7#@#</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Nnandi Ifeanyi</td>
+                            <td>67ttrfg!@345565</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
         
+                        <tr>
+                            <td>Jackson Michael</td>
+                            <td>&878%^%tygu</td>
+                            <td>Attendant</td>
+                            <td>User</td>
+                            <td class="button">
+                                <select name="action" id="action">Action
+                                    <option value="viewRecord">View Record</option>
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>    
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="items" class="tabBody" hidden>
+                    <div>
+                        <h1>Add Items</h1>
+                        <div class="form">
+                            <form>
+                                <input type="text" placeholder="Item Name" required>
+                                <input type="text" placeholder="Serial Number" required>
+                                <input type="text" placeholder="Price" required>
+                                <input type="text" placeholder="Quantity" required>
+                                <input type="text" placeholder="Category" required>
+                                <input type="submit" value="Create">
+                            </form>
+                        </div>    
+                    </div>   
+                    
+                    <h3>Items List</h3>
+                    
+                   <table class="table">
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Serial Number</th>
+                            <th>Price (-N-)</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                        </tr>
+    
+                        <tr>
+                            <td>Campus Exercise Book (60 Leaves)</td>
+                            <td>11123STA</td>
+                            <td>150</td>
+                            <td>50</td>
+                            <td>Stationaries</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Snickers Chocolate</td>
+                            <td>00076SN</td>
+                            <td>250</td>
+                            <td>350</td>
+                            <td>Snacks</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>450</td>
+                            <td>150</td>
+                            <td>Drinks</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Pepsi (50Cl)</td>
+                            <td>00897DR</td>
+                            <td>500</td>
+                            <td>100</td>
+                            <td>Drinks</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td>Sprinkles</td>
+                            <td>00768SN</td>
+                            <td>750</td>
+                            <td>100</td>
+                            <td>Snacks</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+    
+                        <tr>
+                            <td>Lucky Corer</td>
+                            <td>00774ST</td>
+                            <td>1200</td>
+                            <td>30</td>
+                            <td>Stationaries</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+        
+                        <tr>
+                            <td>Don Simon</td>
+                            <td>03456DR</td>
+                            <td>70</td>
+                            <td>1500</td>
+                            <td>Drinks</td> 
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>    
+                </div>
+
+                <div id="records" class="tabBody" hidden>
+                    <h1 style="margin-bottom: 30px;">Sales Records</h1>
+
+                    <table class="table">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product Id</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Amount (-N-)</th>
+                            <th>Attendant</th>
+                            <th>Date Sold</th>
+                        </tr>
+
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pepsi (60Cl)</td>
+                            <td>00896DR</td>
+                            <td>Drinks</td>
+                            <td>5</td>
+                            <td>750</td>
+                            <td>Ogedengbe Paul</td>
+                            <td>94-08-2017</td>
+                            <td class="button">
+                                <select name="action" id="action">Action 
+                                    <option value="edit">Edit</option>
+                                    <option value="delete">Delete</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="categories" class="tabBody" hidden>
+                    <h1>Create Category</h1>
+                    <div class="form">
+                        <form>
+                            <input type="text" placeholder="Category Name" required>
+                            <input type="submit" value="Create">
+                        </form>
+                    </div>
+                    
+                    <h3> Categories List</h3>
+
+                    <div class="catList">
+                        <ol>
+                            <li>
+                                Stationaries (2)
+                                <button>delete</button>
+                            </li>
+                            
+                            <li>
+                                Snacks (2)
+                                <button>delete</button>
+                            </li>
+                            <li>
+                                Drinks (3)
+                                <button>delete</button>
+                            </li>
+                            <li>
+                                Body Creams (0)
+                                <button>delete</button>
+                            </li>
+                            <li>
+                                Perfumes (0)
+                                <button>delete</button>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div id = "sideMenu">
+                <a id = "user" class="menuItem">
+                    <span>Users</span>
+                </a>
+    
+                <a id = "item" class="menuItem">
+                    <span>Items</span>
+                </a>
+            
+                <a id = "record" class="menuItem">
+                    <span>Records</span>
+                </a>
+    
+                <a id = "category" class="menuItem">
+                    <span>Categories</span>
+                </a>
+            </div>
+        </div>
+        <footer>
+            Copyright &copy Adeniran Mark Oluwafemi 2018 
+        </footer>
     </body>
     <script src="javascript/admin.js"></script>
 </html>
