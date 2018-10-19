@@ -1,7 +1,7 @@
 import { isDate } from "util";
 import fs from "fs"
 
-class sales {
+class Sales {
     // Module that gets all sales
     fetchSaleRecords (req, res, next) {
         fs.readFile('src/model/db/sales.json', 'utf-8', (err, data)=> {
@@ -119,4 +119,4 @@ class sales {
     // }
 }
 
-export default new sales;
+export default new Sales;

@@ -1,8 +1,8 @@
-import fs from "fs"
+import fs from 'fs';
 
-class product {
+class Product {
     // Module that gets all products
-    fetchProducts (req, res, next) {
+    fetchProducts(req, res, next) {
         fs.readFile('src/model/db/products.json', 'utf-8', (err, data)=> {
             if (err) {
                 console.log(err);
@@ -21,7 +21,7 @@ class product {
     }
 
     // Module that gets specific product
-    fetchProduct  (req, res, next) {
+    fetchProduct(req, res, next) {
         fs.readFile('src/model/db/products.json', 'utf-8', (err, data)=> {
             if (err) {
                 console.log(err);
@@ -41,7 +41,7 @@ class product {
     }
 
     // Module that create new product
-    createProduct (req, res, next) {
+    createProduct(req, res, next) {
         let product = {
             name: req.body.name,
             productId: req.body.name,
@@ -148,4 +148,4 @@ class product {
    }
 }
 
-export default new product;
+export default new Product;
