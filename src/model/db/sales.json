@@ -1,12 +1,4 @@
 {
-  "000001": {
-    "product": "Pepsi[60Cl]",
-    "salesId": "000001",
-    "category": "Drinks",
-    "quantity": "2",
-    "price": "300",
-    "attendant": "Funmilayo Temitope"
-  },
   "000002": {
     "product": "Pepsi[50Cl]",
     "salesId": "000002",
@@ -14,5 +6,13 @@
     "quantity": "2",
     "price": "200",
     "attendant": "Adeniran Mark"
+  },
+  "000001": {
+    "product": "Pepsi[60Cl]",
+    "salesId": "000001",
+    "category": "Drinks",
+    "quantity": "2",
+    "price": "300",
+    "attendant": "Funmilayo Temitope"
   }
 }

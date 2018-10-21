@@ -1,7 +1,7 @@
 {
   "00902DR": {
     "name": "Cocacola[60Cl]",
-    "productId": "Cocacola[60Cl]",
+    "productId": "00902DR",
     "category": "Drinks",
     "price": "150",
     "quantity": "230"
@@ -12,5 +12,19 @@
     "category": "Drinks",
     "price": "150",
     "quantity": "25"
+  },
+  "00562DR": {
+    "name": "Cocacola[50Cl]",
+    "productId": "00562DR",
+    "category": "Drinks",
+    "price": "80",
+    "quantity": "600"
+  },
+  "00572DR": {
+    "name": "Cocacola[50Cl]",
+    "productId": "00572DR",
+    "category": "Drinks",
+    "price": "80",
+    "quantity": "300"
   }
 }

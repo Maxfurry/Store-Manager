@@ -1,42 +1,41 @@
-import fs from 'fs';
+import func from '../middlewares/functions';
 
 class Product {
     // Module that gets all products
     static fetchProducts(req, res) {
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
+        const products = func.readFile('products');
 
-            const arrayOfObjects = JSON.parse(data);
-
-            return res.status(200).json({
+        if (!products) {
+            return res.status(403).json({
                 TYPE: 'GET',
-                status: 200,
-                info: arrayOfObjects,
-                message: 'Request to get all product successfull',
+                status: 403,
+                message: 'Request to get all product was not succesfull',
             });
+        }
+        return res.status(200).json({
+            TYPE: 'GET',
+            status: 200,
+            info: products,
+            message: 'Request to get all product successfull',
         });
     }
 
     // Module that gets specific product
     static fetchProduct(req, res) {
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            const productId = req.params.productId;
-            const arrayOfObjects = JSON.parse(data);
-            const detail = arrayOfObjects[productId];
+        const product = func.readFile('products', req.params.productId);
 
-            return res.status(200).json({
+        if (!product) {
+            return res.status(403).json({
                 TYPE: 'GET',
-                status: 200,
-                info: detail,
-                message: `Request to get ${productId} successfull`,
+                status: 403,
+                message: 'Request to get specific product was not succesfull',
             });
+        }
+        return res.status(200).json({
+            TYPE: 'GET',
+            status: 200,
+            info: product,
+            message: 'Request to get all product successfull',
         });
     }
 
@@ -44,36 +43,27 @@ class Product {
     static createProduct(req, res) {
         const product = {
             name: req.body.name,
-            productId: req.body.name,
+            productId: req.body.productId,
             category: req.body.category,
             price: req.body.price,
             quantity: req.body.quantity,
         };
 
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.productId] = product;
-            //  console.log(arrayOfObjects);
+        const updatedFile = func.updateFile('products', product, req.body.productId);
 
-            fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (error) => {
-                if (error) {
-                    //  console.log(error);
-                    throw error;
-                } else {
-                    arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: product,
-                        message: 'Product Created Successfully',
-                    });
-                }
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: product,
+            message: 'Product Created Successfully',
         });
     }
 
@@ -87,60 +77,41 @@ class Product {
             quantity: req.body.quantity,
         };
 
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.productId] = product;
-            //  console.log(arrayOfObjects)
+        const updatedFile = func.updateFile('products', product, req.body.productId, 'update');
 
-            fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (error) => {
-                if (error) {
-                    //  console.log(error);
-                    throw error;
-                } else {
-                    arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: product,
-                        message: 'Product Updated Successfully',
-                    });
-                }
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: product,
+            message: 'Product updated Successfully',
         });
     }
 
     //  Module that delete user
     static deleteProduct(req, res) {
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            const product = arrayOfObjects[req.body.productId];
-            delete arrayOfObjects[req.body.productId];
-            //  console.log(arrayOfObjects)
+        const deletedFile = func.deleteFile('products', req.body.productId);
 
-            fs.writeFile('src/model/db/products.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (error) => {
-                if (error) {
-                    //  console.log(error);
-                    throw error;
-                } else {
-                    arrayOfObjects = fs.readFileSync('src/model/db/products.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: product,
-                        message: 'Product Successfully Deleted',
-                    });
-                }
+        if (deletedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: deletedFile,
+            message: 'Product Deleted Successfully',
         });
     }
 }

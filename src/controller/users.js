@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import fs from 'fs';
+import func from '../middlewares/functions';
 
 class Users {
     // Module that create new user
@@ -14,43 +14,33 @@ class Users {
 
         user.password = bcrypt.hashSync(req.body.password, 10);
 
-        fs.readFile('src/model/db/users.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = user;
-            //  console.log(arrayOfObjects)
+        const updatedFile = func.updateFile('users', user, req.body.name);
 
-            fs.writeFile('src/model/db/users.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (error) => {
-                if (error) {
-                    //  console.log(error);
-                    throw error;
-                } else {
-                    arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: {
-                            name: req.body.name,
-                            role: req.body.role,
-                            position: req.body.position,
-                            password: req.body.password,
-                        },
-                        message: 'User Created Successfully',
-                    });
-                }
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: {
+                name: req.body.name,
+                role: req.body.role,
+                position: req.body.position,
+                password: req.body.password,
+            },
+            message: 'User Created Successfully',
         });
     }
 
     // Module that logs in users
     static loginUser(req, res) {
-        let arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-        arrayOfObjects = JSON.parse(arrayOfObjects);
-        const password = arrayOfObjects[req.body.name].password;
+        const getUser = func.readFile('users', req.params.name);
+        const password = getUser[req.body.name].password;
 
         const checkPassword = bcrypt.compareSync(req.body.password, password);
         if (checkPassword) {
@@ -85,56 +75,46 @@ class Users {
 
         user.password = bcrypt.hashSync(req.body.password, 10);
 
-        fs.readFile('src/model/db/users.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = user;
-            //  console.log(arrayOfObjects);
+        const updatedFile = func.updateFile('users', user, req.body.name, 'update');
 
-            fs.writeFile('src/model/db/users.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (error) => {
-                if (error) {
-                    //  console.log(error);
-                    throw error;
-                } else {
-                    arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: {
-                            name: req.body.name,
-                            role: req.body.role,
-                            position: req.body.position,
-                            password: req.body.password,
-                        },
-                        message: 'User Created Successfully',
-                    });
-                }
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: {
+                name: req.body.name,
+                role: req.body.role,
+                position: req.body.position,
+                password: req.body.password,
+            },
+            message: 'User updated Successfully',
         });
     }
 
     //  Module that delete user
     static deleteUser(req, res) {
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data) => {
-            if (err) {
-                //  console.log(err);
-                throw err;
-            }
-            const arrayOfObjects = JSON.parse(data);
-            const user = arrayOfObjects[req.body.name];
-            delete arrayOfObjects[req.body.name];
-            //  console.log(arrayOfObjects);
+        const deletedFile = func.deleteFile('users', req.body.name);
 
-            return res.status(200).json({
-                TYPE: 'POST',
-                status: 200,
-                info: user,
-                message: 'User deleted Successfully',
+        if (deletedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
             });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: deletedFile,
+            message: 'User Deleted Successfully',
         });
     }
 }
