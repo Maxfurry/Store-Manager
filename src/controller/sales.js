@@ -1,122 +1,97 @@
-import { isDate } from "util";
-import fs from "fs"
+import { isDate } from 'util';
+import func from '../middlewares/functions';
 
 class Sales {
     // Module that gets all sales
-    fetchSaleRecords (req, res, next) {
-        fs.readFile('src/model/db/sales.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            } 
+    static fetchSaleRecords(req, res) {
+        const sales = func.readFile('sales');
 
-            let arrayOfObjects = JSON.parse(data);
-
-            return res.status(200).json({
+        if (!sales) {
+            return res.status(403).json({
                 TYPE: 'GET',
-                status: 200,
-                info: arrayOfObjects,
-                message: 'Request to get all records was successfull',
-              });
-        })
-    }
-    
-    // Module that gets specific product
-    fetchSaleRecord  (req, res, next) {
-        fs.readFile('src/model/db/sales.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            } 
-            let salesId = req.params.salesId;
-            let arrayOfObjects = JSON.parse(data);
-            data = arrayOfObjects[salesId];
-           
-            return res.status(200).json({
-                TYPE: 'GET',
-                status: 200,
-                info: data,
-                message: `Request to get record with ID:${salesId} was successfull`,
+                status: 403,
+                message: 'Request to get all product was not succesfull',
             });
-        })      
+        }
+        return res.status(200).json({
+            TYPE: 'GET',
+            status: 200,
+            info: sales,
+            message: 'Request to get all product successfull',
+        });
+    }
+
+    // Module that gets specific product
+    static fetchSaleRecord(req, res) {
+        const sales = func.readFile('sales', req.params.salesId);
+
+        if (!sales) {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Request to get all product was not succesfull',
+            });
+        }
+        return res.status(200).json({
+            TYPE: 'GET',
+            status: 200,
+            info: sales,
+            message: 'Request to get all product successfull',
+        });
     }
 
     // Module that create new product
-    createSaleOrder (req, res, next) {
-        let sales = {
+    static createSaleOrder(req, res) {
+        const sale = {
             product: req.body.product,
             salesId: req.body.salesId,
             category: req.body.category,
             quantity: req.body.quantity,
             price: req.body.price,
             attendant: req.body.attendant,
-            date: isDate
+            date: isDate,
+        };
+
+        const updatedFile = func.updateFile('sales', sale, req.body.salesId);
+
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
+            });
         }
 
-        fs.readFile('src/model/db/sales.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.salesId] = sales;
-            console.log(arrayOfObjects)
-
-            fs.writeFile('src/model/db/sales.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
-                if(err) {
-                    console.log(err);
-                    throw err;
-                } else {
-                    let arrayOfObjects = {};        
-                    arrayOfObjects = fs.readFileSync('src/model/db/sales.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: sales,
-                        message: 'Record Successfully Saved',
-                      });
-                }
-            })
-        })
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: sale,
+            message: 'Product Created Successfully',
+        });
     }
 
-    //Module that delete user
-    deleteSaleRecord (req, res, next) {    
-        fs.readFile('src/model/db/sales.json', 'utf-8', (err, data)=> {
-           if (err) {
-               console.log(err);
-               throw err;
-           }
+    //  Module that delete user
+    static deleteSaleRecord(req, res) {
+        const deletedFile = func.deleteFile('sales', req.body.salesId);
 
-           let arrayOfObjects = JSON.parse(data);
-           let saleRecord = arrayOfObjects[req.body.salesId];
-           delete arrayOfObjects[req.body.salesId];
-           console.log(arrayOfObjects)
+        if (deletedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
+            });
+        }
 
-           fs.writeFile('src/model/db/sales.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
-            if(err) {
-                console.log(err);
-                throw err;
-            } else {
-                let arrayOfObjects = {};        
-                arrayOfObjects = fs.readFileSync('src/model/db/sales.json', 'utf-8');
-                arrayOfObjects = JSON.parse(arrayOfObjects);
-                return res.status(200).json({
-                    TYPE: 'POST',
-                    status: 200,
-                    info: saleRecord,
-                    message: 'Record Deleted Successfully',
-                  });
-            }
-        })    
-       })
-   }
-    
-    
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: deletedFile,
+            message: 'Product Deleted Successfully',
+        });
+    }
+
     // updateSaleRecord (req, res, next) {
-        
     // }
 }
 
-export default new Sales;
+export default Sales;

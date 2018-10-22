@@ -1,146 +1,122 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import fs from 'fs';
+import func from '../middlewares/functions';
 
-class users {
+class Users {
     // Module that create new user
-    createUser (req, res, next) {
-        let user = {
+    static createUser(req, res) {
+        const user = {
             name: req.body.name,
             role: req.body.role,
             position: req.body.position,
-            password: req.body.password
-        }
+            password: req.body.password,
+        };
 
         user.password = bcrypt.hashSync(req.body.password, 10);
 
-        fs.readFile('src/model/db/users.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = user;
-            console.log(arrayOfObjects)
+        const updatedFile = func.updateFile('users', user, req.body.name);
 
-            fs.writeFile('src/model/db/users.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
-                if(err) {
-                    console.log(err);
-                    throw err;
-                } else {
-                    let arrayOfObjects = {};        
-                    arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: {
-                          name: req.body.name,
-                          role: req.body.role,
-                          position: req.body.position,
-                          password: req.body.password
-                        },
-                        message: 'User Created Successfully',
-                      });
-                }
-            })
-        })
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
+            });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: {
+                name: req.body.name,
+                role: req.body.role,
+                position: req.body.position,
+                password: req.body.password,
+            },
+            message: 'User Created Successfully',
+        });
     }
 
     // Module that logs in users
-    loginUser (req, res, next) {
-       let arrayOfObjects = {};        
-        arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-        arrayOfObjects = JSON.parse(arrayOfObjects);
-        let password = arrayOfObjects[req.body.name].password;    
+    static loginUser(req, res) {
+        const getUser = func.readFile('users', req.params.name);
+        const password = getUser[req.body.name].password;
 
-            const checkPassword = bcrypt.compareSync(req.body.password, password);
-            if (checkPassword){
-                const token = jwt.sign({
-                    name: req.body.name,
-                    role: req.body.role
-                }, "lagretame", {
-                    expiresIn: "1h"
-                });
-            
-                return res.status(200).json({
-                TYPE: 'POST',
-                token: token,
-                message: 'Login Successful',
+        const checkPassword = bcrypt.compareSync(req.body.password, password);
+        if (checkPassword) {
+            const token = jwt.sign({
+                name: req.body.name,
+                role: req.body.role,
+            }, 'lagretame', {
+                expiresIn: '1h',
             });
-            } else {
-            return res.status(403).json({
-                TYPE: 'POST',
-                status: 403,
-                message: 'Invalid Credentials',
-            });
-            }
-    }
-
-    //Updates Users Information
-    updateUser (req,res,next) {
-        let user = {
-            name: req.body.name,
-            role: req.body.role,
-            position: req.body.position,
-            password: req.body.password
-        }
-
-        user.password = bcrypt.hashSync(req.body.password, 10);
-
-        fs.readFile('src/model/db/users.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            arrayOfObjects[req.body.name] = user;
-            console.log(arrayOfObjects)
-
-            fs.writeFile('src/model/db/users.json', JSON.stringify(arrayOfObjects, null, 2), 'utf-8', (err) => {
-                if(err) {
-                    console.log(err);
-                    throw err;
-                } else {
-                    let arrayOfObjects = {};        
-                    arrayOfObjects = fs.readFileSync('src/model/db/users.json', 'utf-8');
-                    arrayOfObjects = JSON.parse(arrayOfObjects);
-                    return res.status(200).json({
-                        TYPE: 'POST',
-                        status: 200,
-                        info: {
-                          name: req.body.name,
-                          role: req.body.role,
-                          position: req.body.position,
-                          password: req.body.password
-                        },
-                        message: 'User Created Successfully',
-                      });
-                }
-            })
-        })
-    }
-
-    //Module that delete user
-    deleteUser (req, res, next) {
-        fs.readFile('src/model/db/products.json', 'utf-8', (err, data)=> {
-            if (err) {
-                console.log(err);
-                throw err;
-            }
-            let arrayOfObjects = JSON.parse(data);
-            let user = arrayOfObjects[req.body.name];
-            delete arrayOfObjects[req.body.name];
-            console.log(arrayOfObjects)
 
             return res.status(200).json({
                 TYPE: 'POST',
-                status: 200,
-                info: user,
-                message: 'User deleted Successfully',
-              });
-        })
+                token,
+                message: 'Login Successful',
+            });
+        }
+        return res.status(403).json({
+            TYPE: 'POST',
+            status: 403,
+            message: 'Invalid Credentials',
+        });
+    }
+
+    //  Updates Users Information
+    static updateUser(req, res) {
+        const user = {
+            name: req.body.name,
+            role: req.body.role,
+            position: req.body.position,
+            password: req.body.password,
+        };
+
+        user.password = bcrypt.hashSync(req.body.password, 10);
+
+        const updatedFile = func.updateFile('users', user, req.body.name, 'update');
+
+        if (updatedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
+            });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: {
+                name: req.body.name,
+                role: req.body.role,
+                position: req.body.position,
+                password: req.body.password,
+            },
+            message: 'User updated Successfully',
+        });
+    }
+
+    //  Module that delete user
+    static deleteUser(req, res) {
+        const deletedFile = func.deleteFile('users', req.body.name);
+
+        if (deletedFile === 'error') {
+            return res.status(403).json({
+                TYPE: 'GET',
+                status: 403,
+                message: 'Your request was not succesfull',
+            });
+        }
+
+        return res.status(200).json({
+            TYPE: 'POST',
+            status: 200,
+            info: deletedFile,
+            message: 'User Deleted Successfully',
+        });
     }
 }
 
-export default new users;
+export default Users;
