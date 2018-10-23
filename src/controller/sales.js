@@ -8,13 +8,15 @@ class Sales {
 
     if (!sales) {
       return res.status(403).json({
-        success: false,
+        TYPE: 'GET',
+        status: 403,
         message: 'Request to get all product was not succesfull',
       });
     }
     return res.status(200).json({
-      success: true,
-      sales,
+      TYPE: 'GET',
+      status: 200,
+      info: sales,
       message: 'Request to get all product successfull',
     });
   }
@@ -25,12 +27,14 @@ class Sales {
 
     if (!sales) {
       return res.status(403).json({
-        success: false,
+        TYPE: 'GET',
+        status: 403,
         message: 'Request to get all product was not succesfull',
       });
     }
     return res.status(200).json({
-      success: true,
+      TYPE: 'GET',
+      status: 200,
       info: sales,
       message: 'Request to get all product successfull',
     });
@@ -48,25 +52,20 @@ class Sales {
       date: isDate,
     };
 
-    const updatedFile = func.updateFile('sales', sale, req.body.salesId, 'create');
+    const updatedFile = func.updateFile('sales', sale, req.body.salesId);
 
     if (updatedFile === 'error') {
       return res.status(403).json({
-        success: false,
+        TYPE: 'GET',
+        status: 403,
         message: 'Your request was not succesfull',
       });
     }
 
-    if (updatedFile === 'exist') {
-      return res.status(403).json({
-        success: false,
-        message: 'Product already exist',
-      });
-    }
-
     return res.status(200).json({
-      success: true,
-      sale,
+      TYPE: 'POST',
+      status: 200,
+      info: sale,
       message: 'Product Created Successfully',
     });
   }
@@ -77,14 +76,16 @@ class Sales {
 
     if (deletedFile === 'error') {
       return res.status(403).json({
-        success: false,
+        TYPE: 'GET',
+        status: 403,
         message: 'Your request was not succesfull',
       });
     }
 
     return res.status(200).json({
-      success: true,
-      saleRecord: deletedFile,
+      TYPE: 'POST',
+      status: 200,
+      info: deletedFile,
       message: 'Product Deleted Successfully',
     });
   }
