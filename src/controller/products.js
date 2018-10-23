@@ -7,15 +7,13 @@ class Product {
 
     if (!products) {
       return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
+        success: false,
         message: 'Request to get all product was not succesfull',
       });
     }
     return res.status(200).json({
-      TYPE: 'GET',
-      status: 200,
-      info: products,
+      success: true,
+      products,
       message: 'Request to get all product successfull',
     });
   }
@@ -26,15 +24,13 @@ class Product {
 
     if (!product) {
       return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
+        success: false,
         message: 'Request to get specific product was not succesfull',
       });
     }
     return res.status(200).json({
-      TYPE: 'GET',
-      status: 200,
-      info: product,
+      success: true,
+      product,
       message: 'Request to get all product successfull',
     });
   }
@@ -49,20 +45,25 @@ class Product {
       quantity: req.body.quantity,
     };
 
-    const updatedFile = func.updateFile('products', product, req.body.productId);
+    const updatedFile = func.updateFile('products', product, req.body.productId, 'create');
 
     if (updatedFile === 'error') {
       return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
+        success: false,
         message: 'Your request was not succesfull',
       });
     }
 
+    if (updatedFile === 'exist') {
+      return res.status(403).json({
+        success: false,
+        message: 'Product already exist',
+      });
+    }
+
     return res.status(200).json({
-      TYPE: 'POST',
-      status: 200,
-      info: product,
+      success: true,
+      product,
       message: 'Product Created Successfully',
     });
   }
@@ -81,16 +82,14 @@ class Product {
 
     if (updatedFile === 'error') {
       return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
+        success: false,
         message: 'Your request was not succesfull',
       });
     }
 
     return res.status(200).json({
-      TYPE: 'POST',
-      status: 200,
-      info: product,
+      success: true,
+      product,
       message: 'Product updated Successfully',
     });
   }
@@ -101,16 +100,14 @@ class Product {
 
     if (deletedFile === 'error') {
       return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
+        success: false,
         message: 'Your request was not succesfull',
       });
     }
 
     return res.status(200).json({
-      TYPE: 'POST',
-      status: 200,
-      info: deletedFile,
+      success: true,
+      product: deletedFile,
       message: 'Product Deleted Successfully',
     });
   }
