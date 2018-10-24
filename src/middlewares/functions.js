@@ -26,9 +26,15 @@ const updateFile = (fileName, dataToAdd, whereToAdd, flag) => {
   }
 
   const updatedData = data;
+
+  //  Flag to check create
+  if (data[whereToAdd] && flag === 'create') {
+    return 'exist';
+  }
+
   data[whereToAdd] = dataToAdd;
 
-  // Flag to either update or create data
+  // Flag to check update
   if (!updatedData && flag === 'update') {
     return 'error';
   }
