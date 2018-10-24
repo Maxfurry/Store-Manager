@@ -7,7 +7,8 @@
     "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
-    "test": "mocha --compilers js:babel-register --recursive --timeout 10000"
+    "test": "mocha --compilers js:babel-register --recursive --timeout 10000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
     },
   "repository": {
     "type": "git",
