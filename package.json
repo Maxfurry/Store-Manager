@@ -10,6 +10,12 @@
     "test": "nyc mocha ./src/test/*.js --compilers js:babel-register --recursive --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
     },
+    "nyc": {
+      "exclude": [
+        "src/controller/users.js",
+        "src/middlewares/checkAuth.js"
+      ]
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Maxfurry/Store-Manager.git"
