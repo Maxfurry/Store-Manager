@@ -6,8 +6,15 @@
   "scripts": {
     "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
-    "mocha": "mocha --compilers js:babel-register", 
-    "test": "mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000"
+    "mocha": "mocha --compilers js:babel-register",
+    "test": "nyc mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "nyc": {
+    "exclude": [
+      "src/controller/users.js",
+      "src/middlewares/checkAuth.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -32,6 +39,7 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
+    "coveralls": "^3.0.2",
     "dotenv": "^6.1.0",
     "eslint": "^5.7.0",
     "eslint-config-airbnb-base": "^13.1.0",
@@ -40,7 +48,9 @@
     "express-validator": "^5.3.0",
     "jsonwebtoken": "^8.3.0",
     "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.4",
+    "nyc": "^13.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   }
