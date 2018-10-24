@@ -9,13 +9,13 @@ class Sales {
     if (!sales) {
       return res.status(403).json({
         success: false,
-        message: 'Request to get all product was not succesfull',
+        message: 'Request to get all sale records not succesfull',
       });
     }
     return res.status(200).json({
       success: true,
       sales,
-      message: 'Request to get all product successfull',
+      message: 'Request to get all sale records successfull',
     });
   }
 
@@ -26,13 +26,13 @@ class Sales {
     if (!sales) {
       return res.status(403).json({
         success: false,
-        message: 'Request to get all product was not succesfull',
+        message: 'Request to get specific sale record was not succesfull',
       });
     }
     return res.status(200).json({
       success: true,
-      info: sales,
-      message: 'Request to get all product successfull',
+      sales,
+      message: 'Request to get specific sale record successfull',
     });
   }
 
@@ -60,14 +60,14 @@ class Sales {
     if (updatedFile === 'exist') {
       return res.status(403).json({
         success: false,
-        message: 'Product already exist',
+        message: 'Sale record already exist',
       });
     }
 
     return res.status(200).json({
       success: true,
       sale,
-      message: 'Product Created Successfully',
+      message: 'Sale record created successfully',
     });
   }
 
@@ -85,7 +85,7 @@ class Sales {
     return res.status(200).json({
       success: true,
       saleRecord: deletedFile,
-      message: 'Product Deleted Successfully',
+      message: 'Sale record deleted successfully',
     });
   }
 

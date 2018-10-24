@@ -67,4 +67,29 @@ export default {
     }
     next();
   },
+
+  validateSale: (req, res, next) => {
+    if (!req.body.product || req.body.product.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain product name',
+      });
+      return;
+    }
+    if (!req.body.salesId || req.body.salesId.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain salesId',
+      });
+      return;
+    }
+    if (!req.body.attendant || req.body.attendant.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain attendant name',
+      });
+      return;
+    }
+    next();
+  },
 };
