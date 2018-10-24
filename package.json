@@ -7,9 +7,7 @@
     "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
-    "test": "mocha --compilers js:babel-register --recursive --timeout 10000",
-    "coveralls": "node ./node_modules/coveralls/bin/coveralls.js ./coverage/lcov.info",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "test": "mocha --compilers js:babel-register --recursive --timeout 10000"
     },
   "repository": {
     "type": "git",
