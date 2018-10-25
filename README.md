@@ -1,5 +1,5 @@
 # Store-Manager
-<a href='https://coveralls.io/github/Maxfurry/Store-Manager?branch=master'><img src='https://coveralls.io/repos/github/Maxfurry/Store-Manager/badge.svg?branch=master' alt='Coverage Status' /></a>
+[![Build Status](https://travis-ci.org/Maxfurry/Store-Manager.svg?branch=Develop)](https://travis-ci.org/Maxfurry/Store-Manager>) [![Coverage Status](https://coveralls.io/repos/github/Maxfurry/Store-Manager/badge.svg?branch=Develop)](https://coveralls.io/github/Maxfurry/Store-Manager?branch=Develop) <a href="https://codeclimate.com/github/Maxfurry/Store-Manager/maintainability"><img src="https://api.codeclimate.com/v1/badges/08a20e60d17f15e9eaeb/maintainability" /></a>
 
 Store Manager is a web application that helps store owners manage sales and product inventory
 records. This application is meant for use in a single store.
