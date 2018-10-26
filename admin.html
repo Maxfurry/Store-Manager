@@ -7,7 +7,7 @@
         <title>Store Manager | Dashboard</title>
         <link rel="stylesheet" href="css/admin.css">
     </head>
-    <body>
+    <body onresize="myFunction()">
         <header id="header">
             <div class="right dropdown">
                 <button class="dropBtn"><h3>Username</h3></button>
@@ -18,6 +18,25 @@
             <a href="index.html"><h3>Store Manager</h3></a>
             <div class="clearfix"></div>
         </header> 
+       
+        <span id="mobile" onclick="openNav()">MENU</span>
+        <div id = "sideMenu">    
+            <a id = "user" class="menuItem">
+                <span>Users</span>
+            </a>
+
+            <a id = "item" class="menuItem">
+                <span>Items</span>
+            </a>
+        
+            <a id = "record" class="menuItem">
+                <span>Records</span>
+            </a>
+
+            <a id = "category" class="menuItem">
+                <span>Categories</span>
+            </a>
+        </div>
         <div id="container">
             <div id="content">
                 <div id="users" class="tabBody">
@@ -417,24 +436,6 @@
                     </div>
                     
                 </div>
-            </div>
-
-            <div id = "sideMenu">
-                <a id = "user" class="menuItem">
-                    <span>Users</span>
-                </a>
-    
-                <a id = "item" class="menuItem">
-                    <span>Items</span>
-                </a>
-            
-                <a id = "record" class="menuItem">
-                    <span>Records</span>
-                </a>
-    
-                <a id = "category" class="menuItem">
-                    <span>Categories</span>
-                </a>
             </div>
         </div>
         <footer>

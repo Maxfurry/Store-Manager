@@ -1,3 +1,36 @@
+let state = "closed";
+
+function openNav() {
+    if (state == 'closed') {
+        let sideMenu = document.getElementById("sideMenu");
+        sideMenu.style.display = "block";
+        state = 'open';
+    }else {
+        let sideMenu = document.getElementById("sideMenu");
+        sideMenu.style.display = "none";
+        state = 'closed'
+    }
+    
+}
+
+function myFunction() {
+    if (window.screen.width >= 768 ) {
+        let sideMenu = document.getElementById("sideMenu");
+        sideMenu.style.display = "block";
+    }
+    if (window.screen.width < 768 ) {
+        let sideMenu = document.getElementById("sideMenu");
+        sideMenu.style.display = "none";
+    }
+}
+
+
+/* Set the width of the side navigation to 0 */
+function closeNav() {
+    let sideMenu = document.getElementById("sideMenu");
+    sideMenu.style.display = "none";
+    state = 'closed'} 
+  
 const users = document.getElementById("users");
 const user = document.getElementById("user");
 

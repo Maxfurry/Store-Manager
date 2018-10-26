@@ -10,27 +10,24 @@
     </head>
     <body>
         <div class = "container">
-            <div class="header">
-                <div class="above">
-                    <div class="right dropdown">
+            <header id="header">
+                <nav class="navbar">
+                    <div navbarItems>
+                        <a href="index.html"><h3 class="left">Store Manager</h3></a>
+                    </div>
+                    
+                    <div class="navbarItems navbarRight dropdown">
                         <button class="dropBtn"><h3>Username</h3></button>
                         <div class="dropContent">
                             <a href="profile.html">Profile</a>
                             <a href="login.html">Logout</a>
                         </div>   
                     </div>
-                    <h3>Store Management System</h3>
-                    <div class="clearfix"></div>
-                </div>
-                
-                <div class="img">
-
-                </div>
-            </div>
+                </nav>
+            </header>
 
             <div class="filter">
-                <input type="text" placeholder="  Search">
-                <div class="right dropdown">
+                <div class="filterItem dropdown">
                     <button class="dropBtn"><h3>Categories</h3></button>
                     <div class="dropContent">
                         <a href="#">Drinks</a>
@@ -38,94 +35,94 @@
                         <a href="#">Stationaries</a>
                     </div>   
                 </div>
+
+                <div class="filterItem search">
+                    <input type="text" placeholder="  Search for product" style="width: 100%">    
+                </div>
+
+                <div class="filterItem">
+                    <a href="cart.html"><img src="images/cart.png" alt="cart" width = "35" height = "35"></a><p class="num">25</p>
+                </div>
             </div>
 
-            <div class="clearfix"></div>
-
             <div class="content">
-                <div class = "items">
-                    <table class="table">
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Category</th>
-                        </tr>
-    
-                        <tr>
-                            <td>Campus Exercise Book (60 Leaves)</td>
-                            <td>150</td>
-                            <td>50</td>
-                            <td>Stationaries</td>
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>Snickers Chocolate</td>
-                            <td>250</td>
-                            <td>350</td>
-                            <td>Snacks</td> 
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>Pepsi (60Cl)</td>
-                            <td>450</td>
-                            <td>150</td>
-                            <td>Drinks</td>
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>Pepsi (50Cl)</td>
-                            <td>500</td>
-                            <td>100</td>
-                            <td>Drinks</td>
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>Sprinkles</td>
-                            <td>750</td>
-                            <td>100</td>
-                            <td>Snacks</td>
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-    
-                        <tr>
-                            <td>Lucky Corer</td>
-                            <td>1200</td>
-                            <td>30</td>
-                            <td>Stationaries</td> 
-                            <td class="button"><button> Add</button></td>
-                        </tr>
+                <section class="cards">
+                    <div class="card">
+                        <img src="images/pep.png" alt="">
+                        <div>
+                            <h3>name</h3>
+                            <p class="price">#150</p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td>Don Simon</td>
-                            <td>70</td>
-                            <td>1500</td>
-                            <td>Drinks</td> 
-                            <td class="button"><button> Add</button></td>
-                        </tr>
-                    </table>    
-                </div>
+                    <div class="card">
+                        <img src="images/pep.png" alt="">
+                        <div>
+                            <h3>name</h3>
+                            <p class="price">#150</p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                    </div>
 
-                <div class="cart">
-                    <span class="cartTitle"><h1>cart</h1></span>
-                    <strong>
-                        <p class="cartItem"> Items:</p>
-                        <p class="cartItem">Current Price:</p>
-                        <p class="cartItem">VAT(50%):</p>
-                        <p class="cartItem">Total Price:</p>
-                    </strong>
+                    <div class="card">
+                        <img src="images/pep.png" alt="">
+                        <div>
+                            <h3>name</h3>
+                            <p class="price">#150</p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                    </div>
+                
+                    <div class="card">
+                        <img src="images/pep.png" alt="">
+                        <div>
+                            <h3>name</h3>
+                            <p class="price">#150</p>
+                            <p><button>Add to Cart</button></p>
+                        </div>
+                    </div>
+                          
+                    <div class="card">
+                            <img src="images/pep.png" alt="">
+                            <div>
+                                <h3>name</h3>
+                                <p class="price">#150</p>
+                                <p><button>Add to Cart</button></p>
+                            </div>
+                        </div>
+    
+                        <div class="card">
+                            <img src="images/pep.png" alt="">
+                            <div>
+                                <h3>name</h3>
+                                <p class="price">#150</p>
+                                <p><button>Add to Cart</button></p>
+                            </div>
+                        </div>
+    
+                        <div class="card">
+                            <img src="images/pep.png" alt="">
+                            <div>
+                                <h3>name</h3>
+                                <p class="price">#150</p>
+                                <p><button>Add to Cart</button></p>
+                            </div>
+                        </div>
                     
-                    <button class="button"> Check Out </button> 
-                </div>
-            </div> 
-        </div>
-
-        <footer>
-            Copyright &copy Adeniran Mark Oluwafemi 2018 
-        </footer>
-    </body>
-</html>
+                        <div class="card">
+                            <img src="images/pep.png" alt="">
+                            <div>
+                                <h3>name</h3>
+                                <p class="price">#150</p>
+                                <p><button>Add to Cart</button></p>
+                            </div>
+                        </div>
+                </section>
+            </div>
+    
+            <footer>
+                Copyright &copy Adeniran Mark Oluwafemi 2018 
+            </footer>
+        </body>
+    </html>
