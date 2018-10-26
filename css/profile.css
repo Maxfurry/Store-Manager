@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-size: 30px;
+    padding: 40px;
+    border-bottom: 2px solid #006400;
+}
+
+header a {
+    text-decoration: none;
+    color: #000000;
+}
+
+h1 {
+    color: #76FF03;
+    border-bottom: 2px solid #006400;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropBtn {
+    background-color: #ffffff;
+    color: #90ee90;
+    cursor: pointer;
+}
+
+.dropContent {
+    display: none;
+    position: absolute;
+    width: 150px;
+    background-color: #90ee90
+}
+
+.dropContent a {
+    color: #000000;
+    padding: 10px, 15px;
+    text-decoration: none;
+    display: block;
+    font-size: small;
+}
+
+.dropdown:hover .dropContent {
+    display: block;
+}
+
+.right {
+    float: right;
+}
+
+.clearfix {
+    clear: both;
+}
+
+#content {
+    display: flex;
+    width: 60%;
+    margin-left: 40px;
+}
+
+.info {
+    flex:3;
+}
+
+ul {
+    padding-top: 20px;
+    margin-left: 50px;
+    font-size: 150%;
+    color: #006400;
+}
+
+li {
+    margin-bottom: 30px;
+}
+
+.profile-img {
+    margin-top: 10px;
+    min-width: 200px;
+    height: 200px;
+    flex: 1;
+    background-color: #000000;
+}
+
+.profile-img:hover {
+    border-radius: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    bottom: 0;
+    background-color: lightgreen;
+    padding: 5px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1368px) {
+    #content {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 976px) {
+    #content {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #content {
+        flex-wrap: nowrap;  
+        justify-content: center;
+        margin: 5px;      
+    }
+
+    .profile-img{
+        min-width: 200px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #content {
+        width: 100%;
+        margin: 0;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
