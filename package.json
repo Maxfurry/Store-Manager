@@ -7,6 +7,10 @@
     "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
+    "createTable": "babel-node ./src/model/createTables",
+    "dropTable": "babel-node ./src/model/removeTables",
+    "initialAdmin": "babel-node ./src/model/admin",
+    "resetdb": "npm run dropTable && npm run createTable && npm run initialAdmin",
     "test": "nyc mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

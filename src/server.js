@@ -17,7 +17,6 @@ app
   .use('/api/v1/products', productsRouter)
   .use('/api/v1/sales', salesRouter)
   .use('/api/v1/auth', usersRouter)
-  .use('/api/v1/user', usersRouter)
   .get('/', (req, res) => {
     res.status(200).send('Store Manager is a web application that helps store owners manage sales and product inventory records. This application is meant for use in a single store.');
   });
@@ -25,7 +24,6 @@ app
 const port = process.env.PORT || 3000;
 
 const server = app.listen(port, () => {
-  //  console.log(`listening on port ${port}`);
   process.stdout.write(`listening on port ${port}\n`);
 });
 
