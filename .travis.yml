@@ -12,6 +12,7 @@ cache:
 
 before_script: 
   - npm install
+  - psql -c "CREATE USER Admin WITH PASSWORD 'admin';" -U postgres
 
 script:
 - NODE_ENV=test npm run test
