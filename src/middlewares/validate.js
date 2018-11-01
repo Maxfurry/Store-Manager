@@ -78,4 +78,40 @@ export default {
     }
     next();
   },
+
+  validateLogin: (req, res, next) => {
+    if (!req.body.name || req.body.name.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain user name',
+      });
+      return;
+    }
+    if (!req.body.password || req.body.password.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain password of user',
+      });
+      return;
+    }
+    next();
+  },
+
+  validateUser: (req, res, next) => {
+    if (!req.body.role || req.body.role.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain role of user',
+      });
+      return;
+    }
+    if (!req.body.position || req.body.position.trim().length < 1) {
+      res.status(400).send({
+        success: false,
+        message: 'Request must contain position of user',
+      });
+      return;
+    }
+    next();
+  },
 };

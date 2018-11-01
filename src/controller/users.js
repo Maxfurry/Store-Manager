@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import func from '../middlewares/functions';
 import db from '../model/dbconfig';
 
 class Users {
@@ -64,59 +63,59 @@ class Users {
     });
   }
 
-  //  Updates Users Information
-  static updateUser(req, res) {
-    const user = {
-      name: req.body.name,
-      role: req.body.role,
-      position: req.body.position,
-      password: req.body.password,
-    };
+//   //  Updates Users Information
+//   static updateUser(req, res) {
+//     const user = {
+//       name: req.body.name,
+//       role: req.body.role,
+//       position: req.body.position,
+//       password: req.body.password,
+//     };
 
-    user.password = bcrypt.hashSync(req.body.password, 10);
+//     user.password = bcrypt.hashSync(req.body.password, 10);
 
-    const updatedFile = func.updateFile('users', user, req.body.name, 'update');
+//     const updatedFile = func.updateFile('users', user, req.body.name, 'update');
 
-    if (updatedFile === 'error') {
-      return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
-        message: 'Your request was not succesfull',
-      });
-    }
+//     if (updatedFile === 'error') {
+//       return res.status(403).json({
+//         TYPE: 'GET',
+//         status: 403,
+//         message: 'Your request was not succesfull',
+//       });
+//     }
 
-    return res.status(200).json({
-      TYPE: 'POST',
-      status: 200,
-      info: {
-        name: req.body.name,
-        role: req.body.role,
-        position: req.body.position,
-        password: req.body.password,
-      },
-      message: 'User updated Successfully',
-    });
-  }
+//     return res.status(200).json({
+//       TYPE: 'POST',
+//       status: 200,
+//       info: {
+//         name: req.body.name,
+//         role: req.body.role,
+//         position: req.body.position,
+//         password: req.body.password,
+//       },
+//       message: 'User updated Successfully',
+//     });
+//   }
 
-  //  Module that delete user
-  static deleteUser(req, res) {
-    const deletedFile = func.deleteFile('users', req.body.name);
+//   //  Module that delete user
+//   static deleteUser(req, res) {
+//     const deletedFile = func.deleteFile('users', req.body.name);
 
-    if (deletedFile === 'error') {
-      return res.status(403).json({
-        TYPE: 'GET',
-        status: 403,
-        message: 'Your request was not succesfull',
-      });
-    }
+//     if (deletedFile === 'error') {
+//       return res.status(403).json({
+//         TYPE: 'GET',
+//         status: 403,
+//         message: 'Your request was not succesfull',
+//       });
+//     }
 
-    return res.status(200).json({
-      TYPE: 'POST',
-      status: 200,
-      info: deletedFile,
-      message: 'User Deleted Successfully',
-    });
-  }
+//     return res.status(200).json({
+//       TYPE: 'POST',
+//       status: 200,
+//       info: deletedFile,
+//       message: 'User Deleted Successfully',
+//     });
+//   }
 }
 
 export default Users;

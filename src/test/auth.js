@@ -46,6 +46,84 @@ describe('API endpoint POST /auth/', () => {
       });
   });
 
+  it('Should return Request must contain user name if there is no username', (done) => {
+    const noUser = {
+      name: '',
+      password: 'User',
+    };
+
+    chai.request(server)
+      .post('/api/v1/auth/login')
+      .send(noUser)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request must contain user name');
+        done();
+      });
+  });
+
+  it('Should return Request must contain password of user if there is no password', (done) => {
+    const noPassword = {
+      name: 'User',
+      password: '',
+    };
+
+    chai.request(server)
+      .post('/api/v1/auth/login')
+      .send(noPassword)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request must contain password of user');
+        done();
+      });
+  });
+
+  it('Should return Request must contain role of user if there is no role', (done) => {
+    const noRole = {
+      name: 'User',
+      password: 'user',
+      role: '',
+      position: 'attendant',
+    };
+
+    chai.request(server)
+      .post('/api/v1/auth/signup')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
+      .send(noRole)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request must contain role of user');
+        done();
+      });
+  });
+
+  it('Should return Request must contain position of user if there is no position', (done) => {
+    const noPosition = {
+      name: 'User',
+      password: 'user',
+      role: 'user',
+      position: '',
+    };
+
+    chai.request(server)
+      .post('/api/v1/auth/signup')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
+      .send(noPosition)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request must contain position of user');
+        done();
+      });
+  });
+
   it('Should register user', (done) => {
     chai.request(server)
       .post('/api/v1/auth/signup')
