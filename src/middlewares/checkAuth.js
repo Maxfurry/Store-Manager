@@ -4,11 +4,11 @@ const checkToken = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1];
     //  console.log(token)
-    jwt.verify(token, process.env.JWTKEY, (err, tokenData) => {
+    jwt.verify(token, process.env.JWTKEY, (err) => {
       if (err) {
         return res.status(403).json({
-          status: 403,
-          info: err,
+          success: false,
+          err,
           message: 'Authentication fail, Please provide valid Token',
         });
       }
@@ -16,8 +16,8 @@ const checkToken = (req, res, next) => {
     });
   } catch (err) {
     return res.status(403).json({
-      status: 403,
-      info: err,
+      success: false,
+      err,
       message: 'Authentication fail, Please provide valid Token',
     });
   }
@@ -30,8 +30,8 @@ const checkAdmin = (req, res, next) => {
     jwt.verify(token, process.env.JWTKEY, (err, tokenData) => {
       if (err) {
         return res.status(403).json({
-          status: 403,
-          info: err,
+          success: false,
+          err,
           message: 'You are not authorized',
         });
       }
@@ -40,16 +40,16 @@ const checkAdmin = (req, res, next) => {
         return next();
       }
       return res.status(403).json({
-        status: 403,
-        info: err,
+        success: false,
+        err,
         message: 'You are not authorized',
       });
     });
   } catch (err) {
     //    console.log(err);
     return res.status(403).json({
-      status: 403,
-      info: err,
+      success: false,
+      err,
       message: 'Authentication fail, Please provide valid Token',
     });
   }

@@ -6,22 +6,22 @@ import db from '../model/dbconfig';
 class Users {
   // Module that create new user
   static createUser(req, res, next) {
+    const password = bcrypt.hashSync(req.body.password, 10);
+
     const user = [
       req.body.name,
+      password,
       req.body.role,
       req.body.position,
-      req.body.password,
     ];
 
-    user.password = bcrypt.hashSync(req.body.password, 10);
-
-    db.query('INSERT INTO users(name, password, position, roles) VALUES($1,$2,$3,$4)', user, (err) => {
+    db.query('INSERT INTO users(name, password, roles, position) VALUES($1,$2,$3,$4)', user, (err) => {
       if (err) {
         return next(err);
       }
 
       return res.status(200).json({
-        sucess: true,
+        success: true,
         info: {
           name: req.body.name,
           role: req.body.role,
@@ -39,12 +39,13 @@ class Users {
       if (err) {
         return next(err);
       }
-      if (data.rows.length > 0) {
+      if (data.rowCount > 0) {
         const checkPassword = bcrypt.compareSync(req.body.password, data.rows[0].password);
+        const role = data.rows[0].roles;
         if (checkPassword) {
           const token = jwt.sign({
             name: req.body.name,
-            role: req.body.role,
+            role,
           }, process.env.JWTKEY, {
             expiresIn: '1h',
           });

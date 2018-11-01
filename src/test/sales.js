@@ -208,7 +208,7 @@ describe('API endpoint POST /sales', () => {
     chai.request(server)
       .post('/api/v1/products')
       .send(letterQuantity)
-      .then((res) => {
+      .end((res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);

@@ -4,21 +4,15 @@
   "description": "Manage sales, goods and sales attentant for a store",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./src/server.js",
+    "start": "SET NODE_ENV=development&& nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
     "createTable": "babel-node ./src/model/createTables",
     "dropTable": "babel-node ./src/model/removeTables",
     "initialAdmin": "babel-node ./src/model/admin",
     "resetdb": "npm run dropTable && npm run createTable && npm run initialAdmin",
-    "test": "nyc mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000",
+    "test": "SET NODE_ENV=test&& nyc mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
-  },
-  "nyc": {
-    "exclude": [
-      "src/controller/users.js",
-      "src/middlewares/checkAuth.js"
-    ]
   },
   "repository": {
     "type": "git",
@@ -56,6 +50,8 @@
     "nodemon": "^1.18.4",
     "nyc": "^13.1.0",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pg": "^7.6.0",
+    "promise": "^8.0.2"
   }
 }
