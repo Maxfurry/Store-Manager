@@ -58,13 +58,6 @@ export default {
       });
       return;
     }
-    if (!req.body.productId || req.body.productId.trim().length < 1) {
-      res.status(400).send({
-        success: false,
-        message: 'Request must contain productId',
-      });
-      return;
-    }
     next();
   },
 
