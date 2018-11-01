@@ -12,7 +12,6 @@ cache:
 
 before_script: 
   - npm install
-  - psql -c 'create database travis_ci_test;' -U postgres
   - npm run resetdb
 
 script:
