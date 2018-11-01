@@ -12,79 +12,28 @@ let saleID = '';
 
 const sale = {
   product: 'Pepsi[50Cl]',
-  salesId: '000078',
   category: 'Drinks',
   quantity: '2',
   price: '200',
   attendant: 'Adeniran Mark',
 };
 
-// Test GET endpoint of sales
-describe('API endpoint GET /sales', () => {
-  it('Should return all sales record', (done) => {
-    chai.request(server)
-      .get('/api/v1/sales')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.an('object');
-        res.body.sales.should.be.an('object');
-        res.body.should.have.property('success').eql(true);
-        Object.keys(res.body.sales).should.be.an('array');
-        saleID = Object.keys(res.body.sales);
-        res.body.sales[saleID[0]].should.have.property('product');
-        res.body.sales[saleID[0]].should.have.property('salesId');
-        res.body.sales[saleID[0]].should.have.property('category');
-        res.body.sales[saleID[0]].should.have.property('price');
-        res.body.sales[saleID[0]].should.have.property('quantity');
-        res.body.sales[saleID[0]].should.have.property('attendant');
-        done();
-      });
-  });
-
-  it('Should return specified sales order through its salesId', (done) => {
-    chai.request(server)
-      .get(`/api/v1/sales/${saleID[0]}`)
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.an('object');
-        res.body.should.have.property('success').eql(true);
-        res.body.sales.should.be.an('object');
-        res.body.sales.should.have.property('product');
-        res.body.sales.should.have.property('salesId');
-        res.body.sales.should.have.property('category');
-        res.body.sales.should.have.property('price');
-        res.body.sales.should.have.property('quantity');
-        res.body.sales.should.have.property('attendant');
-        done();
-      });
-  });
-
-  it('Should return Request to get specific sale record was not succesfull if sales ID does not exist', (done) => {
-    chai.request(server)
-      .get('/api/v1/sales/1hj')
-      .then((res) => {
-        res.should.have.status(403);
-        res.body.should.be.an('object');
-        res.body.should.have.property('success').eql(false);
-        res.body.should.have.property('message').eql('Request to get specific sale record was not succesfull');
-        done();
-      });
-  });
-});
-
 //  Test POST endpoint of sale
 describe('API endpoint POST /sales', () => {
   it('Should add sales order to file', (done) => {
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(sale)
-      .then((res) => {
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
         res.should.have.status(200);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(true);
         res.body.should.have.property('sale').be.an('object');
         res.body.sale.should.have.property('product');
-        res.body.sale.should.have.property('salesId');
         res.body.sale.should.have.property('category');
         res.body.sale.should.have.property('price');
         res.body.sale.should.have.property('quantity');
@@ -94,23 +43,9 @@ describe('API endpoint POST /sales', () => {
       });
   });
 
-  it('Should return Sale record already exist if salesId exist', (done) => {
-    chai.request(server)
-      .post('/api/v1/sales')
-      .send(sale)
-      .then((res) => {
-        res.should.have.status(403);
-        res.body.should.be.an('object');
-        res.body.should.have.property('success').eql(false);
-        res.body.should.have.property('message').eql('Sale record already exist');
-        done();
-      });
-  });
-
   it('Should return Request must contain category if there is no category', (done) => {
     const noCat = {
       product: 'Pepsi[50Cl]',
-      salesId: '000078',
       category: '',
       quantity: '2',
       price: '200',
@@ -119,8 +54,12 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(noCat)
-      .then((res) => {
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -132,7 +71,6 @@ describe('API endpoint POST /sales', () => {
   it('Should return Request must contain price if there is no price', (done) => {
     const noPrice = {
       product: 'Pepsi[50Cl]',
-      salesId: '000078',
       category: 'Drinks',
       quantity: '2',
       price: '',
@@ -141,8 +79,9 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(noPrice)
-      .then((res) => {
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -154,7 +93,6 @@ describe('API endpoint POST /sales', () => {
   it('Should return Price must contain only numbers if price is not a number', (done) => {
     const letterPrice = {
       product: 'Pepsi[50Cl]',
-      salesId: '000078',
       category: 'Drinks',
       quantity: '2',
       price: 'aa',
@@ -163,8 +101,9 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(letterPrice)
-      .then((res) => {
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -176,7 +115,6 @@ describe('API endpoint POST /sales', () => {
   it('Should return Request must contain quantity if there is no quantity', (done) => {
     const noQuantity = {
       product: 'Pepsi[50Cl]',
-      salesId: '000078',
       category: 'Drinks',
       quantity: '',
       price: '200',
@@ -185,8 +123,9 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(noQuantity)
-      .then((res) => {
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -207,8 +146,9 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/products')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(letterQuantity)
-      .end((res) => {
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -230,7 +170,8 @@ describe('API endpoint POST /sales', () => {
     chai.request(server)
       .post('/api/v1/sales')
       .send(decimalQuantity)
-      .then((res) => {
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -251,34 +192,13 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(noName)
       .then((res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
         res.body.should.have.property('message').eql('Request must contain product name');
-        done();
-      });
-  });
-
-  it('Should return Request must contain salesId if there is no salesId', (done) => {
-    const noProductId = {
-      product: 'Pepsi[50Cl]',
-      salesId: '',
-      category: 'Drinks',
-      quantity: '2',
-      price: '200',
-      attendant: 'Adeniran Mark',
-    };
-
-    chai.request(server)
-      .post('/api/v1/sales')
-      .send(noProductId)
-      .then((res) => {
-        res.should.have.status(400);
-        res.body.should.be.an('object');
-        res.body.should.have.property('success').eql(false);
-        res.body.should.have.property('message').eql('Request must contain salesId');
         done();
       });
   });
@@ -295,8 +215,9 @@ describe('API endpoint POST /sales', () => {
 
     chai.request(server)
       .post('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
       .send(noProductId)
-      .then((res) => {
+      .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(false);
@@ -306,22 +227,104 @@ describe('API endpoint POST /sales', () => {
   });
 });
 
-describe('API endpoint DELETE /sales', () => {
-  it('Should delete data from file', (done) => {
+// Test GET endpoint of sales
+describe('API endpoint GET /sales', () => {
+  it('Should return all sales record', (done) => {
     chai.request(server)
-      .delete('/api/v1/sales')
-      .send(sale)
-      .then((res) => {
+      .get('/api/v1/sales')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_USER}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.an('object');
+        res.body.sales.should.be.an('array');
+        res.body.should.have.property('success').eql(true);
+        saleID = res.body.sales[0].id;
+        res.body.sales[0].should.have.property('id');
+        res.body.sales[0].should.have.property('product');
+        res.body.sales[0].should.have.property('category');
+        res.body.sales[0].should.have.property('price');
+        res.body.sales[0].should.have.property('quantity');
+        res.body.sales[0].should.have.property('attendant');
+        res.body.should.have.property('message');
+        res.body.message.should.eql('Request to get all sale records successfull');
+        done();
+      });
+  });
+
+  it('Should return specified sales order through its salesId', (done) => {
+    chai.request(server)
+      .get(`/api/v1/sales/${saleID}`)
+      .set('Authorization', `beerer ${process.env.JWT_TEST_USER}`)
+      .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.an('object');
         res.body.should.have.property('success').eql(true);
-        res.body.should.have.property('saleRecord').be.an('object');
-        res.body.saleRecord.should.have.property('product');
-        res.body.saleRecord.should.have.property('salesId');
-        res.body.saleRecord.should.have.property('category');
-        res.body.saleRecord.should.have.property('price');
-        res.body.saleRecord.should.have.property('quantity');
-        res.body.saleRecord.should.have.property('attendant');
+        res.body.sale.should.be.an('array');
+        res.body.sale[0].should.have.property('id');
+        res.body.sale[0].should.have.property('product');
+        res.body.sale[0].should.have.property('category');
+        res.body.sale[0].should.have.property('price');
+        res.body.sale[0].should.have.property('quantity');
+        res.body.sale[0].should.have.property('attendant');
+        done();
+      });
+  });
+
+  it('Should return Request to get specific sale record was not succesfull if sales ID does not exist', (done) => {
+    chai.request(server)
+      .get('/api/v1/sales/1hj')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_USER}`)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request to get specific sale record was not succesfull');
+        done();
+      });
+  });
+
+  it('Should return Request to get record was not succesfull if product ID does not exist', (done) => {
+    chai.request(server)
+      .get('/api/v1/sales/1hj')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_USER}`)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.an('object');
+        res.body.should.have.property('success').eql(false);
+        res.body.should.have.property('message').eql('Request to get specific sale record was not succesfull');
+        done();
+      });
+  });
+});
+
+describe('API endpoint DELETE /sales', () => {
+  it('Should return request was not succesfull, for invalid ID', (done) => {
+    chai.request(server)
+      .delete('/api/v1/sales/kjlkljl')
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
+      .send(sale)
+      .end((err, res) => {
+        if (err) {
+          return done(err);
+        }
+        res.should.have.status(403);
+        res.body.should.be.an('object');
+        res.body.should.have.property('message').eql('Your request was not succesfull');
+        done();
+      });
+  });
+
+  it('Should delete data from file', (done) => {
+    chai.request(server)
+      .delete(`/api/v1/sales/${saleID}`)
+      .set('Authorization', `beerer ${process.env.JWT_TEST_ADMIN}`)
+      .send(sale)
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        }
+        res.should.have.status(200);
+        res.body.should.be.an('object');
         res.body.should.have.property('message').eql('Sale record deleted successfully');
         done();
       });
