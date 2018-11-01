@@ -3,11 +3,6 @@ language: node_js
 node_js:
   - 8.11.1
 
-env:
-  - JWTKEY = 'mylastsaver'
-  - JWT_TEST_ADMIN = ''
-  - JWT_TEST_USER = ''
-  
 cache:
   directories:
     - node_modules
