@@ -12,7 +12,9 @@ cache:
 
 before_script: 
   - npm install
-  - psql -c "CREATE USER Admin WITH PASSWORD 'admin';" -U postgres
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - npm run resetdb
+  - psql -c "CREATE name Admin WITH password 'admin';" -U postgres
 
 script:
 - NODE_ENV=test npm run test
