@@ -69,13 +69,6 @@ export default {
       });
       return;
     }
-    if (!req.body.salesId || req.body.salesId.trim().length < 1) {
-      res.status(400).send({
-        success: false,
-        message: 'Request must contain salesId',
-      });
-      return;
-    }
     if (!req.body.attendant || req.body.attendant.trim().length < 1) {
       res.status(400).send({
         success: false,

@@ -43,7 +43,7 @@ class Product {
         res.status(200).json({
           success: true,
           product: data.rows,
-          message: 'Request to get all product successfull',
+          message: 'Request to get specific product successfull',
         });
         return;
       }
