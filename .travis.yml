@@ -12,7 +12,6 @@ cache:
 
 before_script: 
   - npm install
-  - npm run resetdb
 
 script:
 - npm run test
