@@ -13,7 +13,7 @@ class Product {
         return;
       }
       if (data.rowCount < 1) {
-        res.status(200).json({
+        res.status(204).json({
           success: false,
           message: 'No product exist in database',
         });
@@ -21,7 +21,7 @@ class Product {
       }
       res.status(200).json({
         success: true,
-        data: data.rows,
+        products: data.rows,
         message: 'Request to get all product successfull',
       });
     });
@@ -42,12 +42,12 @@ class Product {
       if (data.rowCount > 0) {
         res.status(200).json({
           success: true,
-          info: data.rows,
+          product: data.rows,
           message: 'Request to get all product successfull',
         });
         return;
       }
-      res.status(403).json({
+      res.status(204).json({
         success: false,
         message: 'Request to get specific product was not succesfull',
       });
@@ -149,7 +149,7 @@ class Product {
         return;
       }
       if (data.rowCount < 1) {
-        res.status(200).json({
+        res.status(403).json({
           success: false,
           message: 'Product Id does not exist',
         });
