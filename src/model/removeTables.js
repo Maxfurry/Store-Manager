@@ -1,18 +1,36 @@
-import db from './dbconfig';
+import { pool } from './dbconfig';
 
-db.query('DROP TABLE IF EXISTS users', (err) => {
+pool.query('DROP TABLE IF EXISTS pro_cat CASCADE', (err) => {
   if (err) {
     console.log(err);
   }
 });
 
-db.query('DROP TABLE IF EXISTS products', (err) => {
+pool.query('DROP TABLE IF EXISTS sales CASCADE', (err) => {
   if (err) {
     console.log(err);
   }
 });
 
-db.query('DROP TABLE IF EXISTS sales', (err) => {
+pool.query('DROP TABLE IF EXISTS sales_record CASCADE', (err) => {
+  if (err) {
+    console.log(err);
+  }
+});
+
+pool.query('DROP TABLE IF EXISTS category CASCADE', (err) => {
+  if (err) {
+    console.log(err);
+  }
+});
+
+pool.query('DROP TABLE IF EXISTS products CASCADE', (err) => {
+  if (err) {
+    console.log(err);
+  }
+});
+
+pool.query('DROP TABLE IF EXISTS users CASCADE', (err) => {
   if (err) {
     console.log(err);
   }

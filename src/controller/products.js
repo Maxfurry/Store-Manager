@@ -30,7 +30,7 @@ class Product {
   // Module that gets specific product
   static fetchProduct(req, res) {
     const id = req.params.productId;
-    db.query('SELECT * from products WHERE id = $1', [id], (err, data) => {
+    db.query('SELECT * from products WHERE product_id = $1', [id], (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -73,12 +73,11 @@ class Product {
   static createProduct(req, res) {
     const product = [
       req.body.name,
-      req.body.category,
       req.body.price,
       req.body.quantity,
     ];
 
-    db.query('INSERT INTO products(name, category, price, quantity) VALUES($1,$2,$3,$4)', product, (err) => {
+    db.query('INSERT INTO products(name, price, quantity) VALUES($1,$2,$3,$4)', product, (err) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -100,17 +99,16 @@ class Product {
     });
   }
 
-  //  updates Products
+  //  Module that updates specific product
   static updateProduct(req, res) {
     const product = [
       req.body.name,
-      req.body.category,
       req.body.price,
       req.body.quantity,
       req.params.productId,
     ];
 
-    db.query('UPDATE products SET name=$1, category=$2, price=$3, quantity=$4 WHERE id=$5', product, (err, data) => {
+    db.query('UPDATE products SET name=$1, price=$2, quantity=$3 WHERE product_id=$4', product, (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -138,9 +136,9 @@ class Product {
     });
   }
 
-  //  Module that delete user
+  //  Module that delete specific product
   static deleteProduct(req, res) {
-    db.query('DELETE from products WHERE id=$1', [req.params.productId], (err, data) => {
+    db.query('DELETE from products WHERE product_id=$1', [req.params.productId], (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,

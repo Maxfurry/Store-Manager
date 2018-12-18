@@ -56,10 +56,14 @@ class Users {
           });
         }
         return res.status(403).json({
-          sucess: false,
+          success: false,
           message: 'Invalid Credentials',
         });
       }
+      return res.status(403).json({
+        success: false,
+        message: 'Invalid Credentials',
+      });
     });
   }
 
