@@ -1,9 +1,9 @@
-import db from '../model/dbconfig';
+import { pool } from '../model/dbconfig';
 
 class Product {
   // Module that gets all products
   static fetchProducts(req, res) {
-    db.query('SELECT * from products', (err, data) => {
+    pool.query('SELECT * from products', (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -30,7 +30,7 @@ class Product {
   // Module that gets specific product
   static fetchProduct(req, res) {
     const id = req.params.productId;
-    db.query('SELECT * from products WHERE product_id = $1', [id], (err, data) => {
+    pool.query('SELECT * from products WHERE product_id = $1', [id], (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -55,7 +55,7 @@ class Product {
   }
 
   static productExist(req, res, next) {
-    db.query('SELECT * from products WHERE name = $1', [req.body.name], (err, data) => {
+    pool.query('SELECT * from products WHERE name = $1', [req.body.name], (err, data) => {
       if (err) {
         return err;
       }
@@ -77,7 +77,7 @@ class Product {
       req.body.quantity,
     ];
 
-    db.query('INSERT INTO products(name, price, quantity) VALUES($1,$2,$3,$4)', product, (err) => {
+    pool.query('INSERT INTO products(name, price, quantity) VALUES($1,$2,$3,$4)', product, (err) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -108,7 +108,7 @@ class Product {
       req.params.productId,
     ];
 
-    db.query('UPDATE products SET name=$1, price=$2, quantity=$3 WHERE product_id=$4', product, (err, data) => {
+    pool.query('UPDATE products SET name=$1, price=$2, quantity=$3 WHERE product_id=$4', product, (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -138,7 +138,7 @@ class Product {
 
   //  Module that delete specific product
   static deleteProduct(req, res) {
-    db.query('DELETE from products WHERE product_id=$1', [req.params.productId], (err, data) => {
+    pool.query('DELETE from products WHERE product_id=$1', [req.params.productId], (err, data) => {
       if (err) {
         res.status(403).json({
           success: false,

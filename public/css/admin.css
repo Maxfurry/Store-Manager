@@ -46,17 +46,16 @@ header a {
 
 
 #sideMenu {
-    margin-top: 60px;
-    margin-left: 30px; 
-    height: 100%;
+    margin-top: 5px;
+    margin-left: 10px; 
     width: 200px;
-    left: 0;
+    height: auto;
+    float: left;
     background-color:#90ee90 ;
     transition: 0.5s;
     overflow-x: hidden;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 10px;
 }
 
 #sideMenu a {
@@ -74,7 +73,7 @@ header a {
 .menuItem {
     border-bottom: 1px solid #00ffff;
     text-align: center;
-    background-color: #006400;
+    background-color: #69F0AE;
     cursor: pointer;
     padding: 40px;
 }
@@ -84,12 +83,11 @@ header a {
 }
 
 #content {
-    position: fixed;
-    right: 0;
-    width: 80%;
-    margin-right: 30px;
-    margin-left: 10px;
-    height: 800px;
+    width: auto;
+    margin-left: 250px;
+    height: 100%;
+    padding: 10px;
+    padding-top: 0;
     border-radius: 10px;
 }
 
@@ -107,13 +105,13 @@ table {
     width: 80%
 }
 
-table tr:nth-child(odd) {
+table tr:nth-child(even) {
     background-color: #90ee90;
 }
 
 table th {
     text-align: left;
-    border: 2px solid darkgreen;
+    background-color: #ffffff;
 }
 
 table td {
@@ -127,8 +125,7 @@ table .button {
 
 .tabBody {
     margin: 20px;
-    width: 80%
-
+    width: 80%;
 }
 
 .catList {
@@ -156,8 +153,77 @@ table .button {
 }
 
 footer {
-    margin-top: 120px;
+    position:fixed;
+    bottom:0;
+    left:0;
+    width: 100%;
     background-color: lightgreen;
     padding: 5px;
     text-align: center;
 }
+
+@media only screen and (max-width: 767px) {
+  
+    #mobile {
+      display: block;
+      color: #fff;
+      background: #000;
+      text-align: center;
+      padding: 7px; 
+      cursor: pointer;
+    }
+  
+    #mobile:active{
+      background: #474747;
+    }
+  
+  
+    #sideMenu {
+    width: 100%;
+    display: none;
+    height: auto;   
+    margin: 0;
+    border-radius: 0;     
+    background-color:#90ee90 ;
+    transition: 0.5s;
+    overflow-x: hidden;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    }
+
+    #sideMenu a {
+        text-decoration: none;
+        display: block;
+        transition: 0.3s;
+        font-size: 20px;
+        margin: 0 auto;
+        overflow-x: hidden;
+    }
+
+    .menuItem {
+        border-bottom: 1px solid #00ffff;
+        text-align: center;
+        background-color: #006400;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    #content {
+      margin-left: 0;
+    }
+  }
+  
+  
+  
+  @media only screen and (min-width: 768px) {
+    #sideMenu {
+      left: 0;
+      display: block;
+      position: absolute;
+      overflow-x: hidden;
+    }
+ 
+    #mobile {
+      display: none;
+    }
+  }

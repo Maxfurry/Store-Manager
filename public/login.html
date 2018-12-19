@@ -13,15 +13,19 @@
         </header> 
 
         <div id="container">
-            <form>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
-                <div id="submit">
-                    <input type="submit" value="Login">
-                </div>
-            </form>
+            <div class="login">
+                <form method="POST" onsubmit='authenticate(); return false'>
+                    <div id="error"></div>
+                    <label for="username"><strong>Username:</strong></label>
+                    <input type="text" id="username" name="username">
+                    <label for="password"><strong>Password:</strong></label>
+                    <input type="password" id="password" name="password">
+                    <div id="submit">
+                        <input type="submit">
+                    </div>
+                </form>
+            </div>
         </div>
+        <script src="javascript/login.js"></script>
     </body>
 </html>

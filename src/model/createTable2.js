@@ -1,6 +1,6 @@
-import { pool } from './dbconfig';
+import { client } from './dbconfig';
 
-pool.query(`CREATE TABLE IF NOT EXISTS sales(
+client.query(`CREATE TABLE IF NOT EXISTS sales(
     sale_id serial PRIMARY KEY,
     product_id integer REFERENCES products(product_id),
     num_of_items integer NOT NULL,

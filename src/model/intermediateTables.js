@@ -1,6 +1,6 @@
-import { pool } from './dbconfig';
+import { client } from './dbconfig';
 
-pool.query(`CREATE TABLE IF NOT EXISTS sales_record(
+client.query(`CREATE TABLE IF NOT EXISTS sales_record(
     record_id serial PRIMARY KEY,
     user_id integer REFERENCES users(user_id),
     sales_id integer REFERENCES sales(sale_id)
@@ -10,7 +10,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS sales_record(
   }
 });
 
-pool.query(`CREATE TABLE IF NOT EXISTS pro_cat(
+client.query(`CREATE TABLE IF NOT EXISTS pro_cat(
     id serial PRIMARY KEY,
     cat_id integer REFERENCES category(cat_id),
     product_id integer REFERENCES products(product_id)

@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../model/dbconfig';
+import { pool } from '../model/dbconfig';
 
 class Users {
   // Module that create new user
@@ -14,7 +14,7 @@ class Users {
       req.body.position,
     ];
 
-    db.query('INSERT INTO users(name, password, roles, position) VALUES($1,$2,$3,$4)', user, (err) => {
+    pool.query('INSERT INTO users(name, password, roles, position) VALUES($1,$2,$3,$4)', user, (err) => {
       if (err) {
         return next(err);
       }
@@ -34,7 +34,7 @@ class Users {
 
   // Module that logs in users
   static loginUser(req, res, next) {
-    db.query('SELECT * from users WHERE name=$1', [req.body.name], (err, data) => {
+    pool.query('SELECT * from users WHERE name=$1', [req.body.name], (err, data) => {
       if (err) {
         return next(err);
       }

@@ -1,7 +1,7 @@
-import { pool } from './dbconfig';
+import { client } from './dbconfig';
 
 
-pool.query(`CREATE TABLE IF NOT EXISTS users(
+client.query(`CREATE TABLE IF NOT EXISTS users(
   user_id serial PRIMARY KEY,
   name text NOT NULL,
   password text NOT NULL,
@@ -13,7 +13,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS users(
   }
 });
 
-pool.query(`CREATE TABLE IF NOT EXISTS category(
+client.query(`CREATE TABLE IF NOT EXISTS category(
   cat_id serial PRIMARY KEY,
   cat_name text NOT NULL
   )`, (err) => {
@@ -22,7 +22,7 @@ pool.query(`CREATE TABLE IF NOT EXISTS category(
   }
 });
 
-pool.query(`CREATE TABLE IF NOT EXISTS products(
+client.query(`CREATE TABLE IF NOT EXISTS products(
   product_id serial PRIMARY KEY,
   name text NOT NULL,
   price money NOT NULL,
