@@ -54,30 +54,13 @@ class Product {
     });
   }
 
-  static productExist(req, res, next) {
-    pool.query('SELECT * from products WHERE name = $1', [req.body.name], (err, data) => {
-      if (err) {
-        return err;
-      }
-      if (data.rowCount > 0) {
-        return res.status(403).send({
-          success: false,
-          message: 'Product already exist',
-        });
-      }
-      return next();
-    });
-  }
-
   // Module that create new product
   static createProduct(req, res) {
-    const product = [
-      req.body.name,
-      req.body.price,
-      req.body.quantity,
-    ];
+    const {
+      name, price, quantity, category, url
+    } = req.body;
 
-    pool.query('INSERT INTO products(name, price, quantity) VALUES($1,$2,$3,$4)', product, (err) => {
+    pool.query(`select createProduct('{"proName": "${name}", "proPrice": ${price}, "proQuantity": ${quantity}, "catName": "${category}", "url": "${url}"}')`, (err) => {
       if (err) {
         res.status(403).json({
           success: false,
@@ -90,6 +73,7 @@ class Product {
         success: true,
         product: {
           name: req.body.name,
+          imageUrl: req.body.url,
           category: req.body.category,
           price: req.body.price,
           quantity: req.body.quantity,

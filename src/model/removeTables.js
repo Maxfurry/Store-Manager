@@ -1,37 +1,18 @@
 import { pool } from './dbconfig';
 
-pool.query('DROP TABLE IF EXISTS pro_cat CASCADE', (err) => {
-  if (err) {
-    console.log(err);
+const dropTables = async () => {
+  try {
+    await pool.query('DROP TABLE IF EXISTS category CASCADE');
+    await pool.query('DROP TABLE IF EXISTS products CASCADE');
+    await pool.query('DROP TABLE IF EXISTS sales CASCADE');
+    await pool.query('DROP TABLE IF EXISTS users CASCADE');
+    await pool.query('DROP TABLE IF EXISTS pro_cat');
+    await pool.query('DROP TABLE IF EXISTS sales_record');
+  } catch (error) {
+    console.log(error);
   }
-});
+  console.log('All Tables Dropped Successfully!');
+  process.exit();
+};
 
-pool.query('DROP TABLE IF EXISTS sales CASCADE', (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
-
-pool.query('DROP TABLE IF EXISTS sales_record CASCADE', (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
-
-pool.query('DROP TABLE IF EXISTS category CASCADE', (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
-
-pool.query('DROP TABLE IF EXISTS products CASCADE', (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
-
-pool.query('DROP TABLE IF EXISTS users CASCADE', (err) => {
-  if (err) {
-    console.log(err);
-  }
-});
+dropTables();

@@ -7,13 +7,10 @@
     "start": "nodemon --exec babel-node ./src/server.js",
     "build": "babel ./src -s -d dist",
     "mocha": "mocha --compilers js:babel-register",
-    "createTable1": "babel-node ./src/model/createTable1",
-    "createTable2": "babel-node ./src/model/createTable2",
-    "intermediateTable": "babel-node ./src/model/intermediateTables",
-    "createTables": "npm run createTable1 && npm run createTable2 && npm run intermediateTable",
+    "createTables": "babel-node ./src/model/createTables",
     "dropTable": "babel-node ./src/model/removeTables",
-    "initialAdmin": "babel-node ./src/model/admin",
-    "resetdb": "npm run dropTable && npm run createTables && npm run initialAdmin",
+    "initialData": "babel-node ./src/model/initialData",
+    "resetdb": "npm run dropTable && npm run createTables && npm run initialData",
     "funcdb": "babel-node ./src/model/fundb",
     "test": "nyc mocha --require babel-core/register --recursive ./src/test/*.js  --timeout 10000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
@@ -53,7 +50,7 @@
     "mocha": "^5.2.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.7",
-    "nyc": "^13.1.0",
+    "nyc": "^13.3.0",
     "pg": "^7.6.0"
   }
 }

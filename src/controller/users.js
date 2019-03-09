@@ -40,13 +40,15 @@ class Users {
       }
       if (data.rowCount > 0) {
         const checkPassword = bcrypt.compareSync(req.body.password, data.rows[0].password);
+        const id = data.rows[0].user_id;
         const role = data.rows[0].roles;
         if (checkPassword) {
           const token = jwt.sign({
-            name: req.body.name,
+            id,
+            username: req.body.name,
             role,
           }, process.env.JWTKEY, {
-            expiresIn: '1h',
+            expiresIn: '24h',
           });
 
           return res.status(200).json({
@@ -55,12 +57,12 @@ class Users {
             message: 'Login Successful',
           });
         }
-        return res.status(403).json({
+        return res.status(400).json({
           success: false,
           message: 'Invalid Credentials',
         });
       }
-      return res.status(403).json({
+      return res.status(400).json({
         success: false,
         message: 'Invalid Credentials',
       });

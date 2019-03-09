@@ -8,6 +8,7 @@ const router = express.Router();
 router
   .get('/', checkAuth.checkToken, sales.fetchSaleRecords)
   .get('/:salesId', checkAuth.checkToken, sales.fetchSaleRecord)
+  // .get('/userId', checkAuth.checkToken, sales.fetchSaleRecord)
   .post('/', checkAuth.checkToken, validate.validateGeneral, validate.validateSale, sales.createSaleOrder)
   .delete('/:salesId', checkAuth.checkAdmin, validate.validateGeneral, validate.validateSale, sales.deleteSaleRecord);
 

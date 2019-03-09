@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.DATABASE_URL_TEST;
   console.log('==============', process.env.NODE_ENV);
 } else {
-  connectionString = process.env.DATABASE_URL_local;
+  connectionString = process.env.DATABASE_URL_LOCAL;
 }
 
 const pool = new Pool({
